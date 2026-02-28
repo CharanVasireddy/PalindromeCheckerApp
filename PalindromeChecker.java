@@ -1,19 +1,43 @@
+class Palindrome {
 
-public class PalindromeChecker { 
-   public static void main(String[] args) {
-        String input = "A man a plan a canal Panama";
-        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-
-        boolean isPalindrome = true;
-
-        for (int i = 0; i < normalized.length() / 2; i++) {
-            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
-                isPalindrome = false;
-                break;
-            }
+    public boolean checkPalindrome(String input) {
+        if (input == null) {
+            return false;
         }
 
-        System.out.println("Input : " + input);
-        System.out.println("Is Palindrome? : " + isPalindrome);
+        String normalized = input.toLowerCase().replaceAll("\\s+", "");
+
+        int left = 0;
+        int right = normalized.length() - 1;
+
+        while (left < right) {
+            if (normalized.charAt(left) != normalized.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+}
+
+ public class PalindromeChecker {
+
+    public static void main(String[] args) {
+
+        String input = "Never Odd Or Even";
+
+        Palindrome checker = new Palindrome();
+
+        boolean result = checker.checkPalindrome(input);
+
+        System.out.println("Input String : " + input);
+
+        if (result) {
+            System.out.println("Result : The string is a Palindrome");
+        } else {
+            System.out.println("Result : The string is NOT a Palindrome");
+        }
     }
 }
